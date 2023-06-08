@@ -12,11 +12,16 @@ window.initMap = function () {
         { label: "E", name: "영국 정원", lat: 48.164182, lng: 11.605574 },
     ];
 
+    const bounds = new google.maps.LatLngBounds();
+
     trip.forEach(({ label, lat, lng }) => {
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
             position: { lat, lng },
             label,
             map
         });
+        bounds.extend(marker.position);
     });
+
+    map.fitBounds(bounds);
 }
